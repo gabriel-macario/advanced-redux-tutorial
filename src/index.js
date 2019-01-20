@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
-import { selectSubreddit, fetchPosts } from './redux/actions';
+import { selectSubreddit, fetchPostsIfNeeded } from './redux/actions';
 import rootReducer from './redux/reducers';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,7 +21,7 @@ const store = createStore(
 )
 
 store.dispatch(selectSubreddit('reactjs'))
-store.dispatch(fetchPosts('reactjs')).then(() => console.log(store.getState()))
+store.dispatch(fetchPostsIfNeeded('reactjs')).then(() => console.log(store.getState()))
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

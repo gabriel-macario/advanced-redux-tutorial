@@ -44,14 +44,14 @@ export function receivePosts(subreddit, json) {
 function fetchPosts(subreddit) {
     return dispatch => {
         dispatch(requestPosts(subreddit));
-        return fetch(`https://www.reddit.com/r/${subreddit.json}`)
+        return fetch(`https://www.reddit.com/r/${subreddit}.json`)
             .then(response => response.json())
             .then(json => dispatch(receivePosts(subreddit, json)));
     }
 }
 
 function shouldFetchPosts(state, subreddit) {
-    const posts = state.PostsBySubreddit[subreddit];
+    const posts = state.postsBySubreddit[subreddit];
     if (!posts) {
         return true;
     } else if (posts.isFetching) {
