@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    selectSubreddit,
     fetchPostsIfNeeded,
-    invalidateSubreddit
 } from '../redux/actions';
 import Posts from '../components/Posts';
 
 class AsyncApp extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentDidMount() {
         const { dispatch } = this.props;
@@ -20,14 +18,16 @@ class AsyncApp extends React.Component {
 
     render() {
         const { posts, isFetching, lastUpdated } = this.props;
+
         return (
             <div>
-                {/* {posts.length > 0 && (
+                {isFetching && posts.length === 0 && <h2>Loading...</h2>}
+                {!isFetching && posts.length === 0 && <h2>Empty</h2>}
+                {posts.length > 0 && (
                     <div>
                         <Posts posts={posts} />
                     </div>
-                )} */}
-                Test
+                )}
             </div>
         )
     }
@@ -38,8 +38,20 @@ class AsyncApp extends React.Component {
 //     dispatch: PropTypes.func.isRequired
 // }
 
-// function mapStateToProps(state) {
-//     const { selectedSubreddit, postsBySubreddit } = state;
-// }
+function mapStateToProps(state) {
+    const { postsBySubreddit } = state;
+    const { isFetching, lastUpdated, items: posts } = postsBySubreddit[
+        "learnprogramming"
+    ] || {
+            isFetching: true,
+            items: []
+        }
 
-export default connect()(AsyncApp);
+    return {
+        posts,
+        isFetching,
+        lastUpdated
+    }
+}
+
+export default connect(mapStateToProps)(AsyncApp);
