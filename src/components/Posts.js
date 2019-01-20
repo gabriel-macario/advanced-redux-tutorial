@@ -13,8 +13,8 @@ class Posts extends React.Component {
     }
 }
 
-// Posts.propTypes = {
-//     posts: PropTypes.array.isRequired
-// }
+Posts.propTypes = {
+    posts: PropTypes.array.isRequired
+}
 
 export default Posts;
