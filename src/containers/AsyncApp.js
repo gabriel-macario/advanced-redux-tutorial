@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     selectSubreddit,
@@ -74,10 +74,14 @@ class AsyncApp extends React.Component {
     }
 }
 
-// AsyncApp.propTypes = {
-//     posts: PropTypes.array.isRequired,
-//     dispatch: PropTypes.func.isRequired
-// }
+AsyncApp.propTypes = {
+    selectedSubreddit: PropTypes.string.isRequired,
+    posts: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    lastUpdated: PropTypes.number,
+    dispatch: PropTypes.func.isRequired
+  }
+  
 
 function mapStateToProps(state) {
     const { postsBySubreddit, selectedSubreddit } = state;
