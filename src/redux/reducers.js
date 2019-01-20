@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
     SELECT_SUBREDDIT,
-    INVALIDATED_SUBREDDIT,
     REQUEST_POSTS,
     RECEIVE_POSTS,
     INVALIDATE_SUBREDDIT
@@ -10,7 +9,7 @@ import {
 function selectedSubreddit(state = 'reactjs', action) {
     switch (action.type) {
         case SELECT_SUBREDDIT:
-            return action.subbreddit;
+            return action.subreddit;
         default:
             return state;
     }
@@ -25,7 +24,7 @@ function posts(
     action
 ) {
     switch(action.type) {
-        case INVALIDATED_SUBREDDIT:
+        case INVALIDATE_SUBREDDIT:
             return {
                 ...state,
                 didInvalidate: true
